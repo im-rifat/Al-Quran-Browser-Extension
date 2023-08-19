@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Al Quran</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://cdn.jsdelivr.net;"
+    />
+    <style>
+      @font-face {
+        font-family: "customfont";
+        src: url("font/Al Majeed Quranic Font_shiped.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      #left {
+        background-color: lightyellow;
+        position: absolute;
+        top: 0px;
+        bottom: 0;
+        left: 0;
+        overflow-y: scroll;
+      }
+
+      #right {
+        background-color: lightgreen;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        overflow-y: scroll;
+      }
+
+      ::-webkit-scrollbar {
+        width: 11px;
+        height: 11px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: tranparent;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: lightblue;
+        border-radius: 5px;
+        border-right: none;
+        border-left: none;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #b30000;
+      }
+      ::-webkit-scrollbar-track-piece:end {
+        background: transparent;
+        margin-bottom: 5px;
+      }
+
+      ::-webkit-scrollbar-track-piece:start {
+        background: transparent;
+        margin-top: 5px;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3" id="left">
+          <table id="id" class="table table-borderless table-hover"></table>
+        </div>
+        <div class="col-sm-9" id="right">
+          <table id="surah_verses" class="table table-borderless"></table>
+        </div>
+      </div>
+    </div>
+
+    <script src="quran_data_reader.js"></script>
+    <script src="quran_uthmani_reader.js"></script>
+  </body>
+</html>

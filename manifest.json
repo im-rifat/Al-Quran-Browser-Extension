@@ -1,0 +1,11 @@
+{
+  "name": "Al-Quran Offline",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "chrome_url_overrides": {
+    "newtab": "tab.html"
+  }
+}
