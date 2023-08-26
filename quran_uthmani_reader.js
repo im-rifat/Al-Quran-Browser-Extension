@@ -1,4 +1,4 @@
-function loadQuranUthmaniXMLDoc(id) {
+export function loadQuranUthmaniXMLDoc(id) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
       // Request finished and response

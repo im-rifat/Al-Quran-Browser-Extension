@@ -5,7 +5,9 @@
   "background": {
     "service_worker": "background.js"
   },
-  "chrome_url_overrides": {
-    "newtab": "tab.html"
+  "permissions": [
+    "tabs"
+  ],
+  "action": {
   }
 }
