@@ -1,3 +1,6 @@
 export async function readFileAsync(fileInput) {
-    return (await fetch(fileInput)).text();
+    try {
+        return (await fetch(fileInput)).text();
+    } catch(err) {
+    }
 }

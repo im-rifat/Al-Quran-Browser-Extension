@@ -1,5 +1,5 @@
-import { renderAsync } from "./utils/render.js";
 import { loadQuranUthmaniXMLDoc } from "./quran_uthmani_reader.js";
+import ListSurah from "./components/list_surah/list_surah.js";
 
 function onItemViewClicked(event) {
 
@@ -23,29 +23,38 @@ function onItemViewClicked(event) {
     }
 }
 
-async function getItemView(name, transliteration, translation, numOfVerses, id) {
-    return await renderAsync('views/item_surah.html', {
-        "name": name,
-        "transliteration": transliteration,
-        "translation": translation,
-        "numOfVerses": numOfVerses,
-        "id": id
-    });
-}
-
 export async function quranDataDetails(xml) {
     var i;
     var xmlDoc = xml.responseXML;
     var listView = ``;
     var x = xmlDoc.getElementsByTagName("sura");
 
-    console.log(xml);
+    const surahList = [];
 
     for (i = 0; i < x.length; i++) {
-        listView += await getItemView(x[i].getAttribute('name'), x[i].getAttribute('tname')
-        , x[i].getAttribute('ename'), x[i].getAttribute('ayas'), x[i].getAttribute('index'));
+        let obj = {};
+        for(let j = 0; j < x[i].attributes.length; j++) {
+            obj[x[i].attributes.item(j).name] = x[i].attributes.item(j).value;
+        }
+
+        surahList.push(obj);
     }
+
+    listView += await new ListSurah(surahList).render();
 
      document.getElementById("table_surah_list").innerHTML = listView;
      document.getElementById("table_surah_list").onclick = onItemViewClicked;
+
+     document.getElementById("search_surah").oninput = async (event) => {
+        let key = event.target.value;
+
+        if(key) key = key.trim();
+
+        let searchResult = key ? surahList.filter((el) => {
+            // search by index or transliteration name
+            return el.index.toString().includes(key) || el.tname.toLowerCase().includes(key.toLowerCase());
+        }) :  surahList;
+
+        document.getElementById("table_surah_list").innerHTML = await new ListSurah(searchResult).render();
+     };
 }
