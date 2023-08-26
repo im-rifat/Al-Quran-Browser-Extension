@@ -7,6 +7,9 @@
 * **Convenient** : No need to visit external websites or applications to read the Quran.
 * **Lightweight**: The extension is designed to be minimalistic and consume minimal system resources.
 
+## Data Source
+The Quranic data used in this project is sourced from https://tanzil.net/download/.
+
 
 ### Development features
 - [x] add surah list
