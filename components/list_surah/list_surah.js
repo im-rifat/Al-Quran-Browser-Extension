@@ -5,12 +5,12 @@ class ListSurah {
         this.datas = datas;
     }
 
-    async render() {
+    render() {
         var listView = ``;
     
         for (let i = 0; i < this.datas.length; i++) {
             let item = new ItemSurah(this.datas[i]);
-            listView += await item.render();
+            listView += item.render();
         }
 
         return listView;

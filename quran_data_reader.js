@@ -23,10 +23,18 @@ function onItemViewClicked(event) {
     }
 }
 
-export async function quranDataDetails(xml) {
+function updateSurahListDom(surahList, key) {
+    let searchResult = key ? surahList.filter((el) => {
+        // search by index or transliteration name
+        return el.index.toString().includes(key) || el.tname.toLowerCase().includes(key.toLowerCase());
+    }) :  surahList;
+
+    document.getElementById("table_surah_list").innerHTML = new ListSurah(searchResult).render();
+}
+
+export function quranDataDetails(xml) {
     var i;
     var xmlDoc = xml.responseXML;
-    var listView = ``;
     var x = xmlDoc.getElementsByTagName("sura");
 
     const surahList = [];
@@ -40,21 +48,14 @@ export async function quranDataDetails(xml) {
         surahList.push(obj);
     }
 
-    listView += await new ListSurah(surahList).render();
+    updateSurahListDom(surahList, "");
+    document.getElementById("table_surah_list").onclick = onItemViewClicked;
 
-     document.getElementById("table_surah_list").innerHTML = listView;
-     document.getElementById("table_surah_list").onclick = onItemViewClicked;
-
-     document.getElementById("search_surah").oninput = async (event) => {
+    document.getElementById("search_surah").oninput = (event) => {
         let key = event.target.value;
 
         if(key) key = key.trim();
 
-        let searchResult = key ? surahList.filter((el) => {
-            // search by index or transliteration name
-            return el.index.toString().includes(key) || el.tname.toLowerCase().includes(key.toLowerCase());
-        }) :  surahList;
-
-        document.getElementById("table_surah_list").innerHTML = await new ListSurah(searchResult).render();
-     };
+        updateSurahListDom(surahList, key)
+    };
 }
