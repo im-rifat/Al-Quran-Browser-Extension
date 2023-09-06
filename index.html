@@ -17,8 +17,23 @@
         font-style: normal;
       }
 
+      .scrollable-div {
+        max-height: 100vh; /* Set a maximum height for scrollability */
+        overflow-y: scroll; /* Enable vertical scrolling */
+        padding: 10px; /* Add some padding for content */
+      }
+
       #left {
         background-color: lightyellow;
+        position: absolute;
+        top: 0px;
+        bottom: 0;
+        left: 0;
+        overflow-y: scroll;
+      }
+
+      #middle {
+        background-color: lightcoral;
         position: absolute;
         top: 0px;
         bottom: 0;
@@ -76,22 +91,9 @@
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3" id="left">
-          <div class="form-outline">
-            <input
-              type="search"
-              id="search_surah"
-              class="form-control"
-              placeholder="Search surah"
-              aria-label="Search"
-            />
-          </div>
-          <table
-            id="table_surah_list"
-            class="table table-borderless table-hover"
-          ></table>
-        </div>
-        <div class="col-sm-9" id="right">
+        <div class="col-sm-2 scrollable-div" id="searchSurah"></div>
+        <div class="col-sm-1 scrollable-div" id="searchVerseNumber"></div>
+        <div class="col-sm-9 scrollable-div">
           <table id="surah_verses" class="table table-borderless"></table>
         </div>
       </div>

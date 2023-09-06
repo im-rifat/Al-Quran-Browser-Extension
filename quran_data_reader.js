@@ -1,35 +1,45 @@
 import { loadQuranUthmaniXMLDoc } from "./quran_uthmani_reader.js";
-import ListSurah from "./components/list_surah/list_surah.js";
+import searchView from "./components/search_view.js";
+import ListView from "./components/list/list_view.js";
+import createSurahAdapter from "./components/surah_adapter.js";
+import createVerseNumberAdapter from "./components/verse_number_adapter.js";
 
-function onItemViewClicked(event) {
+const verseNumberListView = new ListView(
+    document.getElementById("searchVerseNumber"),
+    "verse_number_list"
+);
 
-    let tempTarget = event.target;
+var verseIndices = [];
 
-    var rows = document.getElementsByClassName("surah_item");
-    for (var i = 0; i < rows.length; i++) {
-        if(rows[i].classList.contains('table-active')) rows[i].classList.remove('table-active');
-    }
-
-    while(tempTarget != null) {
-        tempTarget = tempTarget.parentElement;
-        if(tempTarget.hasAttribute('data-id')) {
-
-            const rowId = tempTarget.getAttribute('data-id');
-            tempTarget.classList.add('table-active');
-
-            loadQuranUthmaniXMLDoc(rowId);
-            break;
-        }
-    }
-}
-
-function updateSurahListDom(surahList, key) {
+function searchSurahList(surahList, key) {
     let searchResult = key ? surahList.filter((el) => {
         // search by index or transliteration name
         return el.index.toString().includes(key) || el.tname.toLowerCase().includes(key.toLowerCase());
     }) :  surahList;
 
-    document.getElementById("table_surah_list").innerHTML = new ListSurah(searchResult).render();
+    return searchResult;
+}
+
+function onSurahItemClicked(surah) {
+    loadVerseNumberList(surah['ayas']);
+    loadQuranUthmaniXMLDoc(surah['index']);
+}
+
+function onVerseNumberItemClicked(index) {
+    console.log(index);
+}
+
+function loadVerseNumberList(numberOfVerse) {
+    verseIndices = [];
+    for(let i = 0; i < numberOfVerse; i++) verseIndices.push(i+1);
+
+    verseNumberListView.setAdapter(
+        createVerseNumberAdapter(
+        verseIndices
+        , onVerseNumberItemClicked)
+    );
+
+    //document.getElementById("verse_number_list").innerHTML = new ListVerseNumber(numberOfVerse).render();
 }
 
 export function quranDataDetails(xml) {
@@ -48,14 +58,19 @@ export function quranDataDetails(xml) {
         surahList.push(obj);
     }
 
-    updateSurahListDom(surahList, "");
-    document.getElementById("table_surah_list").onclick = onItemViewClicked;
+    document.getElementById("searchVerseNumber").prepend(
+        searchView("search_versse", "Verse", (search) => {
+            console.log(search);
+        })
+    )
 
-    document.getElementById("search_surah").oninput = (event) => {
-        let key = event.target.value;
+    let searchResult = searchSurahList(surahList, '');
 
-        if(key) key = key.trim();
+    const listView = new ListView(document.getElementById("searchSurah"), "search_surah_list");
+    listView.setAdapter(createSurahAdapter(searchResult, onSurahItemClicked));
 
-        updateSurahListDom(surahList, key)
-    };
+    document.getElementById("searchSurah").prepend(searchView("search_surah", "Search surah", (search) => {
+        searchResult = searchSurahList(surahList, search);
+        listView.setAdapter(createSurahAdapter(searchResult, onSurahItemClicked));
+    }));
 }
