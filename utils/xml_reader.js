@@ -5,7 +5,6 @@ export async function readXmlAsync(xmlFile) {
             xmlhttp.onreadystatechange = function () {
             // Request finished and response
             // is ready and Status is "OK"
-            console.log(this.readyState + " " + this.status);
             if (this.readyState == 4 && this.status == 200) {
                 resolve(this);
             } else {

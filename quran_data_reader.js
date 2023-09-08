@@ -6,7 +6,7 @@ import createVerseAdapter from "./components/verse_adapter.js";
 import chapterInstance from "./chapter.js";
 
 const surahListAdapter = createSurahAdapter(onSurahItemClicked);
-const numberListAdapter = createVerseNumberAdapter(onVerseNumberItemClicked);
+let numberListAdapter = createVerseNumberAdapter(onVerseNumberItemClicked);
 const chapterListAdapter = createVerseAdapter(null);
 
 const verseNumberListView = new ListView(
@@ -45,6 +45,7 @@ function searchVerseNumberList(numberList, key) {
 function onSurahItemClicked(surah) {
     loadVerseNumberList(surah['ayas']);
     chapterListAdapter.submitList(chapterInstance.getChapter(surah['index']-1));
+    verseListView.scrollToPosition(1);
 }
 
 function onVerseNumberItemClicked(index) {
@@ -55,7 +56,8 @@ function onVerseNumberItemClicked(index) {
 function loadVerseNumberList(numberOfVerse) {
     verseIndices = [];
     for(let i = 0; i < numberOfVerse; i++) verseIndices.push(i+1);
-
+    numberListAdapter = createVerseNumberAdapter(onVerseNumberItemClicked);
+    verseNumberListView.setAdapter(numberListAdapter);
     numberListAdapter.submitList(verseIndices);
 
     verseNumberListView.scrollToPosition(0);

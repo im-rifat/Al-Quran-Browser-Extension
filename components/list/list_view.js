@@ -25,6 +25,7 @@ class ListView {
 
     setAdapter(adapter) {
         this.#adapter = adapter;
+        this.#adapter.onDetachListView(this.#element);
         this.#adapter.onAttachListView(this.#element);
     }
 

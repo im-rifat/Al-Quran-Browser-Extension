@@ -30,6 +30,17 @@ class ListAdapter {
         this.#element = lisView;
     }
 
+    onDetachListView(listView) {
+        let childElement = listView.firstChild;
+
+        while(childElement) {
+            listView.removeChild(childElement);
+            childElement = listView.firstChild;
+        }
+
+        this.#element = undefined;
+    }
+
     #createViewHolder(position) {
         return this.create(position);
     }

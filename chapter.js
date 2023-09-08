@@ -1,34 +1,6 @@
-function loadQuranUthmaniXMLDoc() {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      // Request finished and response
-      // is ready and Status is "OK"
-      if (this.readyState == 4 && this.status == 200) {
-        loadTranslationXml(this);
-      }
-    };
+import { readXmlAsync } from "./utils/xml_reader.js";
 
-    // employee.xml is the external xml file
-    xmlhttp.open("GET", "resources/quran-uthmani.xml", true);
-    xmlhttp.send();
-}
-
-function loadTranslationXml(arabicXml) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      // Request finished and response
-      // is ready and Status is "OK"
-      if (this.readyState == 4 && this.status == 200) {
-        quranUthmaniDetails(arabicXml, this);
-      }
-    };
-
-    // employee.xml is the external xml file
-    xmlhttp.open("GET", "resources/bn-bengali.xml", true);
-    xmlhttp.send();
-}
-
-function quranUthmaniDetails(xml, translationXml) {
+function parseXml(xml, translationXml) {
     var i;
     var xmlDoc = xml.responseXML;
     let translationXmlDoc = translationXml.responseXML;
@@ -74,7 +46,11 @@ class Chapter {
     constructor() {
         if(instance) throw new Error("New instance cannot be created!!");
 
-        loadQuranUthmaniXMLDoc();
+        Promise.all([readXmlAsync('resources/quran-uthmani.xml')
+        , readXmlAsync('resources/bn-bengali.xml')])
+        .then((values) => {
+            parseXml(values[0], values[1]);
+        });
 
         instance = this;
     }

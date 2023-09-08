@@ -1,9 +1,11 @@
 import ListAdapter from "./list/list_adapter.js";
 import { createElement, findElement } from "../utils/node_utils.js";
 
-let itemClickedIdentifier = -1;
+var itemClickedIdentifier = -1;
 
 function createVerseNumberAdapter(onItemClickListener) {
+    itemClickedIdentifier = -1;
+
     const listAdapter = new ListAdapter();
 
     listAdapter.create = (position) => {
@@ -20,9 +22,6 @@ function createVerseNumberAdapter(onItemClickListener) {
     };
 
     listAdapter.bind = (target, position) => {
-        //node.firstChild.parentElement.setAttribute('data-id', surahList[position].index);
-        //node.firstChild.parentElement.setAttribute('data-position', position);
-
         target.setAttribute('data-id', listAdapter.list[position]);
         target.setAttribute('data-position', position);
 
