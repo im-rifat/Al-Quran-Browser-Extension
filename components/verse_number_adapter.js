@@ -1,12 +1,12 @@
-import ListViewAdapter from "./list/list_view_adapter.js";
+import ListAdapter from "./list/list_adapter.js";
 import { createElement, findElement } from "../utils/node_utils.js";
 
 let itemClickedIdentifier = -1;
 
-function createVerseNumberAdapter(indices, onItemClickListener) {
-    return new ListViewAdapter(() => {
-        return indices.length;
-    }, (position) => {
+function createVerseNumberAdapter(onItemClickListener) {
+    const listAdapter = new ListAdapter();
+
+    listAdapter.create = (position) => {
         const template = `
         <tr class="verse_number">
             <td>
@@ -17,14 +17,16 @@ function createVerseNumberAdapter(indices, onItemClickListener) {
         </tr>`;
 
         return createElement(template);
-    }, (target, position) => {
+    };
+
+    listAdapter.bind = (target, position) => {
         //node.firstChild.parentElement.setAttribute('data-id', surahList[position].index);
         //node.firstChild.parentElement.setAttribute('data-position', position);
 
-        target.setAttribute('data-id', indices[position]);
+        target.setAttribute('data-id', listAdapter.list[position]);
         target.setAttribute('data-position', position);
 
-        if(itemClickedIdentifier != indices[position]) {
+        if(itemClickedIdentifier != listAdapter.list[position]) {
             if(target.classList.contains('table-active')) target.classList.remove('table-active');
         } else {
             if(!target.classList.contains('table-active')) target.classList.add('table-active');
@@ -35,9 +37,13 @@ function createVerseNumberAdapter(indices, onItemClickListener) {
         });
 
         if(foundElement) {
-            foundElement.textContent = `${indices[position]}`;
+            foundElement.textContent = `${listAdapter.list[position]}`;
         }
-    }, (target, siblings) => {
+    };
+
+    listAdapter.clickListener = (target, siblings) => {
+        const dataList = listAdapter.list;
+
         for (let i = 0; i < siblings.length; i++) {
             if(siblings[i].classList.contains('table-active')) siblings[i].classList.remove('table-active');
         }
@@ -47,8 +53,10 @@ function createVerseNumberAdapter(indices, onItemClickListener) {
             itemClickedIdentifier = target.getAttribute('data-id');
         }
 
-        if(onItemClickListener) onItemClickListener(indices[target.getAttribute('data-position')]);
-    })
+        if(onItemClickListener) onItemClickListener(dataList[target.getAttribute('data-position')]);
+    };
+
+    return listAdapter;
 }
 
 export default createVerseNumberAdapter;
