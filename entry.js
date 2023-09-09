@@ -5,7 +5,7 @@ import createVerseNumberAdapter from "./components/verse_number_adapter.js";
 import createVerseAdapter from "./components/verse_adapter.js";
 import chapterInstance from "./chapter.js";
 
-const surahListAdapter = createSurahAdapter(onSurahItemClicked);
+const surahListAdapter = createSurahAdapter(onSurahItemClicked, 1);
 let numberListAdapter = createVerseNumberAdapter(onVerseNumberItemClicked);
 const chapterListAdapter = createVerseAdapter(null);
 

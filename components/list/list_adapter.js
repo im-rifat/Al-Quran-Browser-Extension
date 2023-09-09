@@ -29,6 +29,8 @@ class ListAdapter {
     }
 
     onDetachListView(listView) {
+        if(listView == null || listView == undefined) return;
+        
         let childElement = listView.firstChild;
 
         while(childElement) {

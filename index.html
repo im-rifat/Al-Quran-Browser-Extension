@@ -34,6 +34,11 @@
         font-family: BanglaFont;
         font-size: 20px;
       }
+
+      .scrollable_content {
+        max-height: 100vh;
+        overflow: auto;
+      }
     </style>
 
     <link
@@ -42,11 +47,17 @@
     />
   </head>
   <body>
-    <div class="container" style="margin: 1rem">
+    <div class="" style="margin: 1rem">
       <div class="is-mobile columns">
-        <div class="column is-2" id="searchSurah"></div>
-        <div class="column is-1" id="searchVerseNumber"></div>
-        <div class="column" id="surahVerse"></div>
+        <div class="column is-2 scrollable_content">
+          <div id="searchSurah"></div>
+        </div>
+        <div class="column is-1 scrollable_content">
+          <div id="searchVerseNumber"></div>
+        </div>
+        <div class="column">
+          <div id="surahVerse"></div>
+        </div>
       </div>
     </div>
 

@@ -9,13 +9,13 @@ class ListView {
     constructor(parentNode, id) {
         this.#adapter = new ListAdapter();
         this.#element = listView(id);
-        parentNode.appendChild(this.#element);
+        if(parentNode) parentNode.appendChild(this.#element);
     }
 
     setAdapter(adapter) {
         this.#adapter = adapter;
-        this.#adapter.onDetachListView(this.#element);
-        this.#adapter.onAttachListView(this.#element);
+        if(adapter) this.#adapter.onDetachListView(this.#element);
+        if(adapter) this.#adapter.onAttachListView(this.#element);
     }
 
     scrollToPosition(position) {
@@ -27,10 +27,9 @@ class ListView {
         }
 
         if(this.#element.childNodes[pos]) {
-
             this.#element.childNodes[pos].scrollIntoView({
                 behavior: 'instant',
-                block: 'center'
+                block: 'nearest'
             });
         }
     }

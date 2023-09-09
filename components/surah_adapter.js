@@ -3,9 +3,10 @@ import { createElement } from "../utils/node_utils.js";
 
 let itemClickedIdentifier = -1;
 
-function createSurahAdapter(onItemClickListener) {
+function createSurahAdapter(onItemClickListener, deItemClickIdentifer) {
 
     const listAdapter = new ListAdapter();
+    itemClickedIdentifier = deItemClickIdentifer ? deItemClickIdentifer : -1;
 
     listAdapter.create = (position) => {
         const template = `<div class="container mt-2 p-2">
