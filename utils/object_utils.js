@@ -6,13 +6,13 @@ function deepEqual(object1, object2) {
       return false;
     }
   
+    // checking object structure by comparing key
     for (const key of keys1) {
       const val1 = object1[key];
       const val2 = object2[key];
       const areObjects = isObject(val1) && isObject(val2);
       if (
-        areObjects && !deepEqual(val1, val2) ||
-        !areObjects && val1 !== val2
+        areObjects && !deepEqual(val1, val2)
       ) {
         return false;
       }

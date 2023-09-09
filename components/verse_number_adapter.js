@@ -9,14 +9,8 @@ function createVerseNumberAdapter(onItemClickListener) {
     const listAdapter = new ListAdapter();
 
     listAdapter.create = (position) => {
-        const template = `
-        <tr class="verse_number">
-            <td>
-                <div class="col m-0">
-                    <p class="m-0">$index</p>
-                </div>
-            </td>
-        </tr>`;
+        const template = `<div class="col m-0">
+                    <p class="m-0">$index</p></div>`;
 
         return createElement(template);
     };
@@ -31,21 +25,18 @@ function createVerseNumberAdapter(onItemClickListener) {
             if(!target.classList.contains('table-active')) target.classList.add('table-active');
         }
 
-        target.firstChild.firstChild.firstChild.textContent = `${listAdapter.list[position]}`;
+        target.firstChild.textContent = `${listAdapter.list[position]}`;
 
-        //console.log(target.firstChild.nextSibling.firstChild.nextSibling.firstChild.nextSibling);
-        //target.firstChild.nextSibling.firstChild.nextSibling.firstChild.nextSibling.textContent = `${listAdapter.list[position]}`;
+        target.onclick = (event) => {
+            itemClickedIdentifier = target.getAttribute('data-id');
 
-        /*const foundElement = findElement(target, (node) => {
-            return node && node.nodeName == 'P';
-        });
+            if(onItemClickListener) onItemClickListener(listAdapter.list[target.getAttribute('data-position')]);
 
-        if(foundElement) {
-            foundElement.textContent = `${listAdapter.list[position]}`;
-        }*/
+            listAdapter.notifyDatasetChanged();
+        }
     };
 
-    listAdapter.clickListener = (target, siblings) => {
+    /*listAdapter.clickListener = (target, siblings) => {
         const dataList = listAdapter.list;
 
         for (let i = 0; i < siblings.length; i++) {
@@ -58,7 +49,7 @@ function createVerseNumberAdapter(onItemClickListener) {
         }
 
         if(onItemClickListener) onItemClickListener(dataList[target.getAttribute('data-position')]);
-    };
+    };*/
 
     return listAdapter;
 }

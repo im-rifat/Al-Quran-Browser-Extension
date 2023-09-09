@@ -2,10 +2,10 @@ import ListAdapter from "./list/list_adapter.js";
 import { createElement } from "../utils/node_utils.js";
 
 function createBismiViewHolder() {
-    const bismillah = `<tr class='bismillah'><td>
+    const bismillah = `<tr><td>
             <div class='m-0'>
             <p dir='rtl' class='text-center m-0 text-right' style="font-family: customfont; font-size:31px"></p>
-            <p data='translation' class='text-center m-0' style="font-size:17px"></p>
+            <p class='text-center m-0' style="font-size:17px"></p>
             </div>
         </td></tr>`;
 
@@ -18,11 +18,11 @@ function bindBismiViewHolder(target, bismi) {
 }
 
 function createVerseViewHolder() {
-    const verse = `<tr class='verse_item'>
+    const verse = `<tr>
         <td>
             <div class='m-0'>
             <p dir='rtl' class='m-0 text-right' style="font-family: customfont; font-size:31px"></p>
-            <p data='' class='m-0' style="font-size:17px"></p>
+            <p class='m-0' style="font-size:17px"></p>
             </div>
         </td></tr>`;
 
@@ -56,7 +56,7 @@ function createVerseAdapter(onItemClickListener) {
         else bindVerseViewHolder(target, verse);
     };
 
-    listAdapter.clickListener = null;
+   // listAdapter.clickListener = null;
 
     return listAdapter;
 }

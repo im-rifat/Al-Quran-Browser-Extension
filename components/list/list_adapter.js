@@ -8,14 +8,12 @@ class ListAdapter {
 
     create;
     bind;
-    clickListener;
     #element;
     #currentList;
 
-    constructor(create, bind, clickListener) {
+    constructor(create, bind) {
         this.create = create;
         this.bind = bind;
-        this.clickListener = clickListener;
 
         this.#currentList = [];
         this.list = [];
@@ -49,8 +47,8 @@ class ListAdapter {
         this.bind(target, position);
     }
 
-    onItemClicked(target, siblings) {
-        if(this.clickListener) this.clickListener(target, siblings);
+    notifyDatasetChanged() {
+        this.#newListUpdated();
     }
 
     #isContentSame(item1, item2) {

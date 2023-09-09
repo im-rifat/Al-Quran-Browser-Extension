@@ -9,7 +9,7 @@ class ListView {
     constructor(parentNode, id) {
         this.#adapter = new ListAdapter();
         this.#element = listView(id);
-        this.#element.onclick = (event) => {
+        /*this.#element.onclick = (event) => {
             let target = event.target;
 
             while(target.parentElement != undefined && target.parentElement.nodeName != 'TABLE') {
@@ -19,7 +19,7 @@ class ListView {
             this.#adapter.onItemClicked(target, [].filter.call(this.#element.childNodes, (ele) => {
                 return target != ele;
             }));
-        }
+        }*/
         parentNode.appendChild(this.#element);
     }
 
@@ -46,7 +46,7 @@ class ListView {
 
 function listView(id) {
     const template  = `
-        <table id="${id}" class="table table-borderless table-hover"></table>`;
+        <div id="${id}" class="scrollable-div"></div>`;
 
     const element = createElement(template);
 

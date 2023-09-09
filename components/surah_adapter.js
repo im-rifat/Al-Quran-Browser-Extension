@@ -8,14 +8,8 @@ function createSurahAdapter(onItemClickListener) {
     const listAdapter = new ListAdapter();
 
     listAdapter.create = (position) => {
-        const template = `
-        <tr data-id="" data-position = "0" class="surah_item">
-            <td>
-                <div class="col m-0">
-                    <p class="m-0">$index. $tname</p>
-                </div>
-            </td>
-        </tr>`;
+        const template = `<div class="col m-0">
+                    <p class="m-0">$index. $tname</p></div>`;
 
         return createElement(template);
     };
@@ -24,7 +18,7 @@ function createSurahAdapter(onItemClickListener) {
         //node.firstChild.parentElement.setAttribute('data-id', surahList[position].index);
         //node.firstChild.parentElement.setAttribute('data-position', position);
 
-        target.firstChild.firstChild.firstChild.textContent = `${listAdapter.list[position].index}. ${listAdapter.list[position].tname}`;
+        target.firstChild.textContent = `${listAdapter.list[position].index}. ${listAdapter.list[position].tname}`;
 
         target.setAttribute('data-id', listAdapter.list[position].index);
         target.setAttribute('data-position', position);
@@ -35,16 +29,16 @@ function createSurahAdapter(onItemClickListener) {
             if(!target.classList.contains('table-active')) target.classList.add('table-active');
         }
 
-        /*const foundElement = findElement(target, (node) => {
-            return node && node.nodeName == 'P';
-        });
+        target.onclick = (event) => {
+            itemClickedIdentifier = target.getAttribute('data-id');
 
-        if(foundElement) {
-            foundElement.textContent = `${listAdapter.list[position].index}. ${listAdapter.list[position].tname}`;
-        }*/
+            listAdapter.notifyDatasetChanged();
+
+            if(onItemClickListener) onItemClickListener(listAdapter.list[target.getAttribute('data-position')]);
+        }
     };
 
-    listAdapter.clickListener = (target, siblings) => {
+    /*listAdapter.clickListener = (target, siblings) => {
         for (let i = 0; i < siblings.length; i++) {
             if(siblings[i].classList.contains('table-active')) siblings[i].classList.remove('table-active');
         }
@@ -55,7 +49,7 @@ function createSurahAdapter(onItemClickListener) {
         }
 
         if(onItemClickListener) onItemClickListener(listAdapter.list[target.getAttribute('data-position')]);
-    };
+    };*/
 
     return listAdapter;
 }
