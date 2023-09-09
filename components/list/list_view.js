@@ -46,11 +46,7 @@ class ListView {
 
 function listView(id) {
     const template  = `
-        <table
-            id="${id}"
-            class="table table-borderless table-hover"
-          ></table>
-    `;
+        <table id="${id}" class="table table-borderless table-hover"></table>`;
 
     const element = createElement(template);
 

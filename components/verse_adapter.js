@@ -1,58 +1,37 @@
 import ListAdapter from "./list/list_adapter.js";
-import { createElement, findElement } from "../utils/node_utils.js";
+import { createElement } from "../utils/node_utils.js";
 
 function createBismiViewHolder() {
-    const bismillah = `
-        <tr class='bismillah'><td>
+    const bismillah = `<tr class='bismillah'><td>
             <div class='m-0'>
             <p dir='rtl' class='text-center m-0 text-right' style="font-family: customfont; font-size:31px"></p>
             <p data='translation' class='text-center m-0' style="font-size:17px"></p>
             </div>
-        </td></tr>
-
-    `;
+        </td></tr>`;
 
     return createElement(bismillah);
 }
 
 function bindBismiViewHolder(target, bismi) {
-    const arabicText = findElement(target, (node) => {
-        return node && node.nodeName == 'P' && node.hasAttribute('dir');
-    });
-
-    const translationText = findElement(target, (node) => {
-        return node && node.nodeName == 'P' && node.hasAttribute('data');
-    })
-
-    if(arabicText) arabicText.textContent = bismi['text'];
-    if(translationText) translationText.textContent = bismi['translation'];
+    target.firstChild.firstChild.firstChild.textContent = bismi['text'];
+    target.firstChild.firstChild.firstChild.nextSibling.textContent = bismi['translation'];
 }
 
 function createVerseViewHolder() {
-    const verse = `
-        <tr class='verse_item'><td>
+    const verse = `<tr class='verse_item'>
+        <td>
             <div class='m-0'>
             <p dir='rtl' class='m-0 text-right' style="font-family: customfont; font-size:31px"></p>
             <p data='' class='m-0' style="font-size:17px"></p>
             </div>
-        </td></tr>
-
-    `;
+        </td></tr>`;
 
     return createElement(verse);
 }
 
 function bindVerseViewHolder(target, verse) {
-    const arabicText = findElement(target, (node) => {
-        return node && node.nodeName == 'P' && node.hasAttribute('dir');
-    });
-
-    const translationText = findElement(target, (node) => {
-        return node && node.nodeName == 'P' && node.hasAttribute('data');
-    })
-
-    if(arabicText) arabicText.textContent = verse['text'];
-    if(translationText) translationText.textContent = verse['translation'];
+    target.firstChild.firstChild.firstChild.textContent = verse['text'];
+    target.firstChild.firstChild.firstChild.nextSibling.textContent = verse['translation'];
 }
 
 function createVerseAdapter(onItemClickListener) {

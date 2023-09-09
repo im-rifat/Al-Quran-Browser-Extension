@@ -3,13 +3,7 @@ import {createElement, findElement} from "../utils/node_utils.js";
 function searchView(id, placeholder, searchListener) {
     const template = `
         <div class="form-outline">
-            <input
-              type="search"
-              id="${id}"
-              class="form-control"
-              placeholder="${placeholder}"
-              aria-label="Search"
-            />
+            <input type="search" id="${id}" class="form-control" placeholder="${placeholder}" aria-label="Search"/>
           </div>
             `;
 

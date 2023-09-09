@@ -1,5 +1,5 @@
 import ListAdapter from "./list/list_adapter.js";
-import { createElement, findElement } from "../utils/node_utils.js";
+import { createElement } from "../utils/node_utils.js";
 
 let itemClickedIdentifier = -1;
 
@@ -24,6 +24,8 @@ function createSurahAdapter(onItemClickListener) {
         //node.firstChild.parentElement.setAttribute('data-id', surahList[position].index);
         //node.firstChild.parentElement.setAttribute('data-position', position);
 
+        target.firstChild.firstChild.firstChild.textContent = `${listAdapter.list[position].index}. ${listAdapter.list[position].tname}`;
+
         target.setAttribute('data-id', listAdapter.list[position].index);
         target.setAttribute('data-position', position);
 
@@ -33,13 +35,13 @@ function createSurahAdapter(onItemClickListener) {
             if(!target.classList.contains('table-active')) target.classList.add('table-active');
         }
 
-        const foundElement = findElement(target, (node) => {
+        /*const foundElement = findElement(target, (node) => {
             return node && node.nodeName == 'P';
         });
 
         if(foundElement) {
             foundElement.textContent = `${listAdapter.list[position].index}. ${listAdapter.list[position].tname}`;
-        }
+        }*/
     };
 
     listAdapter.clickListener = (target, siblings) => {

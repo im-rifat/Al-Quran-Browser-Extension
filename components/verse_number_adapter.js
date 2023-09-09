@@ -1,5 +1,5 @@
 import ListAdapter from "./list/list_adapter.js";
-import { createElement, findElement } from "../utils/node_utils.js";
+import { createElement } from "../utils/node_utils.js";
 
 var itemClickedIdentifier = -1;
 
@@ -31,13 +31,18 @@ function createVerseNumberAdapter(onItemClickListener) {
             if(!target.classList.contains('table-active')) target.classList.add('table-active');
         }
 
-        const foundElement = findElement(target, (node) => {
+        target.firstChild.firstChild.firstChild.textContent = `${listAdapter.list[position]}`;
+
+        //console.log(target.firstChild.nextSibling.firstChild.nextSibling.firstChild.nextSibling);
+        //target.firstChild.nextSibling.firstChild.nextSibling.firstChild.nextSibling.textContent = `${listAdapter.list[position]}`;
+
+        /*const foundElement = findElement(target, (node) => {
             return node && node.nodeName == 'P';
         });
 
         if(foundElement) {
             foundElement.textContent = `${listAdapter.list[position]}`;
-        }
+        }*/
     };
 
     listAdapter.clickListener = (target, siblings) => {

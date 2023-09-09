@@ -1,7 +1,20 @@
+function isEmptyOrSpaces(str){
+    return str === null || str.match(/^ *$/) !== null;
+}
+
 function createElement(htmlStr) {
     let template = document.createElement('template');
-    template.innerHTML = htmlStr.trim();
-    //console.log(template.content.childNodes);
+
+    const result = htmlStr.split(/\r?\n/);
+    let normalizeStr = '';
+
+    result.forEach((element, index) => {
+        if(!isEmptyOrSpaces(element)) {
+            normalizeStr += element.trim();
+        }
+    });
+
+    template.innerHTML = normalizeStr.trim();
 
     return template.content.firstChild;
 }
