@@ -28,6 +28,7 @@ function parseXml(xml, translationXml) {
                 }
 
                 verses.push({
+                    'chapter': (i+1).toString(),
                     'index': rows[j].getAttribute('index'),
                     'text': rows[j].getAttribute('text'),
                     'translation': trRows[j].getAttribute('text')

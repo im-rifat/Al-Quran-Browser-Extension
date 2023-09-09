@@ -8,8 +8,8 @@ function createSurahAdapter(onItemClickListener) {
     const listAdapter = new ListAdapter();
 
     listAdapter.create = (position) => {
-        const template = `<div class="col m-0">
-                    <p class="m-0">$index. $tname</p></div>`;
+        const template = `<div class="container mt-2 p-2">
+                    <p>$index. $tname</p></div>`;
 
         return createElement(template);
     };
@@ -24,9 +24,9 @@ function createSurahAdapter(onItemClickListener) {
         target.setAttribute('data-position', position);
 
         if(itemClickedIdentifier != listAdapter.list[position].index) {
-            if(target.classList.contains('table-active')) target.classList.remove('table-active');
+            if(target.classList.contains('has-background-primary-light')) target.classList.remove('has-background-primary-light');
         } else {
-            if(!target.classList.contains('table-active')) target.classList.add('table-active');
+            if(!target.classList.contains('has-background-primary-light')) target.classList.add('has-background-primary-light');
         }
 
         target.onclick = (event) => {

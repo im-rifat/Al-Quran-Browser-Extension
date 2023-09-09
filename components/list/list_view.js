@@ -38,7 +38,7 @@ class ListView {
 
 function listView(id) {
     const template  = `
-        <div id="${id}" class="scrollable-div"></div>`;
+        <div id="${id}" class="list"></div>`;
 
     const element = createElement(template);
 
