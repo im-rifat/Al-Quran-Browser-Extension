@@ -56,8 +56,6 @@ function createVerseAdapter(onItemClickListener) {
         else bindVerseViewHolder(target, verse);
     };
 
-   // listAdapter.clickListener = null;
-
     return listAdapter;
 }
 

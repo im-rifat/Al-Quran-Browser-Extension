@@ -9,17 +9,6 @@ class ListView {
     constructor(parentNode, id) {
         this.#adapter = new ListAdapter();
         this.#element = listView(id);
-        /*this.#element.onclick = (event) => {
-            let target = event.target;
-
-            while(target.parentElement != undefined && target.parentElement.nodeName != 'TABLE') {
-                target = target.parentElement;
-            }
-
-            this.#adapter.onItemClicked(target, [].filter.call(this.#element.childNodes, (ele) => {
-                return target != ele;
-            }));
-        }*/
         parentNode.appendChild(this.#element);
     }
 

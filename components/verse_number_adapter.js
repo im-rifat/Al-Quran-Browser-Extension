@@ -36,21 +36,6 @@ function createVerseNumberAdapter(onItemClickListener) {
         }
     };
 
-    /*listAdapter.clickListener = (target, siblings) => {
-        const dataList = listAdapter.list;
-
-        for (let i = 0; i < siblings.length; i++) {
-            if(siblings[i].classList.contains('table-active')) siblings[i].classList.remove('table-active');
-        }
-
-        target.classList.add('table-active');
-        if(target.hasAttribute('data-id')) {
-            itemClickedIdentifier = target.getAttribute('data-id');
-        }
-
-        if(onItemClickListener) onItemClickListener(dataList[target.getAttribute('data-position')]);
-    };*/
-
     return listAdapter;
 }
 

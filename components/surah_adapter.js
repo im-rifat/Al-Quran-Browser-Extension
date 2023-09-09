@@ -38,19 +38,6 @@ function createSurahAdapter(onItemClickListener) {
         }
     };
 
-    /*listAdapter.clickListener = (target, siblings) => {
-        for (let i = 0; i < siblings.length; i++) {
-            if(siblings[i].classList.contains('table-active')) siblings[i].classList.remove('table-active');
-        }
-
-        target.classList.add('table-active');
-        if(target.hasAttribute('data-id')) {
-            itemClickedIdentifier = target.getAttribute('data-id');
-        }
-
-        if(onItemClickListener) onItemClickListener(listAdapter.list[target.getAttribute('data-position')]);
-    };*/
-
     return listAdapter;
 }
 
