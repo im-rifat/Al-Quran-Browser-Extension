@@ -2,36 +2,29 @@ import ListAdapter from "./list/list_adapter.js";
 import { createElement } from "../utils/node_utils.js";
 
 function createBismiViewHolder() {
-    const bismillah = `<tr><td>
-            <div class='m-0'>
-            <p dir='rtl' class='text-center m-0 text-right' style="font-family: customfont; font-size:31px"></p>
-            <p class='text-center m-0' style="font-size:17px"></p>
-            </div>
-        </td></tr>`;
+    const bismillah = `<div class='m-0'>
+            <p dir='rtl' class='text-center m-0 text-right arabic_text'></p>
+            <p class='text-center m-0' style="font-size:17px"></p></div>`;
 
     return createElement(bismillah);
 }
 
 function bindBismiViewHolder(target, bismi) {
-    target.firstChild.firstChild.firstChild.textContent = bismi['text'];
-    target.firstChild.firstChild.firstChild.nextSibling.textContent = bismi['translation'];
+    target.firstChild.textContent = bismi['text'];
+    target.firstChild.nextSibling.textContent = bismi['translation'];
 }
 
 function createVerseViewHolder() {
-    const verse = `<tr>
-        <td>
-            <div class='m-0'>
-            <p dir='rtl' class='m-0 text-right' style="font-family: customfont; font-size:31px"></p>
-            <p class='m-0' style="font-size:17px"></p>
-            </div>
-        </td></tr>`;
+    const verse = `<div class='m-0'>
+            <p dir='rtl' class='m-0 text-right arabic_text'></p>
+            <p class='m-0' style="font-size:17px"></p></div>`;
 
     return createElement(verse);
 }
 
 function bindVerseViewHolder(target, verse) {
-    target.firstChild.firstChild.firstChild.textContent = verse['text'];
-    target.firstChild.firstChild.firstChild.nextSibling.textContent = verse['translation'];
+    target.firstChild.textContent = verse['text'];
+    target.firstChild.nextSibling.textContent = verse['translation'];
 }
 
 function createVerseAdapter(onItemClickListener) {
