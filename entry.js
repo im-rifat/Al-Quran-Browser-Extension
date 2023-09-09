@@ -63,7 +63,7 @@ function loadVerseNumberList(numberOfVerse) {
     verseNumberListView.scrollToPosition(0);
 }
 
-export function quranDataDetails(xml) {
+export function main(xml) {
     var i;
     var xmlDoc = xml.responseXML;
     var x = xmlDoc.getElementsByTagName("sura");
@@ -97,4 +97,11 @@ export function quranDataDetails(xml) {
         searchResult = searchSurahList(surahList, search);
         surahListAdapter.submitList(searchResult);
     }));
+
+    setTimeout(() => {
+        onSurahItemClicked({
+            'ayas': 7,
+            'index': 1
+        });
+    }, 100);
 }

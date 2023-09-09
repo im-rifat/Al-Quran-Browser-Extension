@@ -26,10 +26,13 @@ class ListView {
             pos = position >= childSize ? childSize-1 : position;
         }
 
-        this.#element.childNodes[pos].scrollIntoView({
-            behavior: 'instant',
-            block: 'center'
-        });
+        if(this.#element.childNodes[pos]) {
+
+            this.#element.childNodes[pos].scrollIntoView({
+                behavior: 'instant',
+                block: 'center'
+            });
+        }
     }
 }
 

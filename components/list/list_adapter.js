@@ -20,7 +20,7 @@ class ListAdapter {
     }
 
     submitList(newList) {
-        this.list = newList;
+        this.list = (newList == null || newList == undefined) ? [] : newList;
         this.#newListUpdated();
     }
 
