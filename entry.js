@@ -10,7 +10,7 @@ let numberListAdapter = createVerseNumberAdapter(onVerseNumberItemClicked);
 const chapterListAdapter = createVerseAdapter(null);
 
 const verseNumberListView = new ListView(
-    document.getElementById("searchVerseNumber"),
+    document.getElementById("verseNumberContainer"),
     "verse_number_list"
 );
 verseNumberListView.setAdapter(numberListAdapter);
@@ -46,6 +46,11 @@ function onSurahItemClicked(surah) {
     loadVerseNumberList(surah['ayas']);
     chapterListAdapter.submitList(chapterInstance.getChapter(surah['index']-1));
     verseListView.scrollToPosition(1);
+
+    let element = document.getElementById('appContainer');
+    element.addEventListener('scroll', (event) => {
+        console.log(event);
+    })
 }
 
 function onVerseNumberItemClicked(index) {
@@ -79,7 +84,7 @@ export function main(xml) {
         surahList.push(obj);
     }
 
-    document.getElementById("searchVerseNumber").prepend(
+    document.getElementById("searchVerseNumber").append(
         searchView("search_versse", "Verse", (search) => {
             console.log(search);
 
@@ -89,11 +94,11 @@ export function main(xml) {
 
     let searchResult = searchSurahList(surahList, '');
 
-    const listView = new ListView(document.getElementById("searchSurah"), "search_surah_list");
+    const listView = new ListView(document.getElementById("surahContainer"), "search_surah_list");
     listView.setAdapter(surahListAdapter);
     surahListAdapter.submitList(searchResult);
 
-    document.getElementById("searchSurah").prepend(searchView("search_surah", "Search surah", (search) => {
+    document.getElementById("searchSurah").append(searchView("search_surah", "Search surah", (search) => {
         searchResult = searchSurahList(surahList, search);
         surahListAdapter.submitList(searchResult);
     }));

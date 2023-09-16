@@ -1,62 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Al Quran</title>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       http-equiv="Content-Security-Policy"
       content="script-src 'self' https://cdn.jsdelivr.net;"
     />
-    <style>
-      @font-face {
-        font-family: "customfont";
-        src: url("/fonts/Al_Majeed_Quranic-Font.ttf") format("truetype");
-      }
-
-      @font-face {
-        font-family: "ArabicFont";
-        src: url("/fonts/_PDMS_IslamicFontRegular.ttf") format("truetype");
-      }
-
-      @font-face {
-        font-family: "BanglaFont";
-        src: url("/fonts/Kalpurush.ttf") format("truetype");
-      }
-
-      .arabic_text {
-        font-family: ArabicFont;
-        font-size: 50px;
-      }
-
-      .bangla_text {
-        font-family: BanglaFont;
-        font-size: 20px;
-      }
-
-      .scrollable_content {
-        max-height: 100vh;
-        overflow: auto;
-      }
-    </style>
 
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Al Quran</title>
   </head>
   <body>
-    <div class="" style="margin: 1rem">
-      <div class="is-mobile columns">
-        <div class="column is-2 scrollable_content">
-          <div id="searchSurah"></div>
+    <div class="root-container">
+      <div class="nav-sidebar">
+        <div class="nav_container">
+          <div class="inner_box1">
+            <div id="searchSurah"></div>
+            <div id="surahContainer" class="box1"></div>
+          </div>
+          <div class="inner_box2">
+            <div id="searchVerseNumber"></div>
+            <div class="box2" id="verseNumberContainer"></div>
+          </div>
+
+          <div class="vertical"></div>
         </div>
-        <div class="column is-1 scrollable_content">
-          <div id="searchVerseNumber"></div>
-        </div>
-        <div class="column">
+      </div>
+      <div class="main-container">
+        <progress class="progress is-small is-primary" value="20" max="100">
+          20%
+        </progress>
+
+        <div class="app_container" id="appContainer">
           <div id="surahVerse"></div>
+          <footer class="content pt-6 pb-3">
+            <div class="content has-text-centered">
+              <p>
+                <strong>Al Quran Chrome Extension</strong> an open source
+                <a href="https://github.com/im-rifat/Al-Quran-Browser-Extension"
+                  >project</a
+                >.
+              </p>
+            </div>
+          </footer>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ class ListView {
 
 function listView(id) {
     const template  = `
-        <div id="${id}" class="list"></div>`;
+        <div></div>`;
 
     const element = createElement(template);
 
