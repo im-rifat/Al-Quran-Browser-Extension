@@ -20,3 +20,5 @@ The Quranic data used in this project is sourced from https://tanzil.net/downloa
 - [x] search surah
 - [x] add verse number list
 - [x] search verse number
+- [x] verse with bangla translation
+- [x] progress with scrolling
