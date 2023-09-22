@@ -65,7 +65,7 @@
   }
 
   .vertical {
-    border-left: 1px solid black;
+    border-left: 1px solid #adb5bd;
     height: 100%;
     position:fixed;
     left: 25%;

@@ -5,6 +5,9 @@ import createVerseNumberAdapter from "./components/verse_number_adapter.js";
 import createVerseAdapter from "./components/verse_adapter.js";
 import chapterInstance from "./chapter.js";
 
+/**
+ * declare variables and assign properties
+ */
 const surahListAdapter = createSurahAdapter(onSurahItemClicked, 1);
 let numberListAdapter = createVerseNumberAdapter(onVerseNumberItemClicked);
 const chapterListAdapter = createVerseAdapter(null);
@@ -22,6 +25,25 @@ const verseListView = new ListView(
 );
 verseListView.setAdapter(chapterListAdapter);
 
+const progress = document.getElementById('progress');
+const verseContainer = document.getElementById('appContainer');
+verseContainer.addEventListener('scroll', (event) => {
+
+    let clientHeight = verseContainer.clientHeight;
+    let scrollHeight = verseContainer.scrollHeight;
+    let scrollTop = verseContainer.scrollTop;
+    let diff = scrollHeight - clientHeight;
+    let value = 0;
+    if(diff > 0) {
+        value = (scrollTop/diff)*100;
+    }
+
+    progress.value = value;
+});
+
+/**
+ * declare functions
+ */
 function searchSurahList(surahList, key) {
     let searchResult = key ? surahList.filter((el) => {
         // search by index or transliteration name
@@ -45,12 +67,7 @@ function searchVerseNumberList(numberList, key) {
 function onSurahItemClicked(surah) {
     loadVerseNumberList(surah['ayas']);
     chapterListAdapter.submitList(chapterInstance.getChapter(surah['index']-1));
-    verseListView.scrollToPosition(1);
-
-    let element = document.getElementById('appContainer');
-    element.addEventListener('scroll', (event) => {
-        console.log(event);
-    })
+    verseListView.scrollToPosition(0);
 }
 
 function onVerseNumberItemClicked(index) {
